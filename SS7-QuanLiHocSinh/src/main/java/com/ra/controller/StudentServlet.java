@@ -1,6 +1,6 @@
-package com.mosoftvn.controller;
+package com.ra.controller;
 
-import com.mosoftvn.model.Student;
+import com.ra.model.Student;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +13,16 @@ import java.util.List;
 
 @WebServlet(name = "studentServlet", value = "/student")
 public class StudentServlet extends HttpServlet {
-    private List<Student> students = new ArrayList<Student>();
+    private List<Student> students = new ArrayList<>();
 
     @Override
     public void init() throws ServletException {
-        students.add(new Student("B1", "nguyen van a", "ha tay", 18, "LV01", true));
-        students.add(new Student("B2", "nguyen van b", "ha noi", 19, "LV02", false));
+        students.add(new Student("A01", "tran van a", "ha noi", 18, "lv01", true));
+        students.add(new Student("A02", "tran van b", "ho chi minh", 10, "lv02", false));
+        students.add(new Student("A03", "tran van c", "da nang", 19, "lv03", true));
     }
 
     @Override
-
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         if (action == null) {
@@ -43,8 +43,8 @@ public class StudentServlet extends HttpServlet {
                     req.getRequestDispatcher("views/update-student.jsp").forward(req, resp);
                     break;
                 case "delete":
-                    String studentCodee = req.getParameter("id");
-                    students.remove(findByStudentCode(studentCodee));
+                    String idDelete = req.getParameter("id");
+                    students.remove(findByStudentCode(idDelete));
                     showStudent(req, resp);
                     break;
                 default:
@@ -59,22 +59,25 @@ public class StudentServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String action = req.getParameter("action");
 
-        // lay du lie tu form gui len
+        // lay du lieu cua constroll tren form
         String studentCode = req.getParameter("studentCode");
-        String name = req.getParameter("name");
+        String studentName = req.getParameter("studentName");
         String address = req.getParameter("address");
         int age = Integer.parseInt(req.getParameter("age"));
-        String classroom = req.getParameter("classroom");
-        boolean sex = Boolean.parseBoolean(req.getParameter("age"));
+        String classRoom = req.getParameter("classRoom");
+        boolean sex = Boolean.parseBoolean(req.getParameter("sex"));
+
         if (action == null) {
-            students.add(new Student(studentCode, name, address, age, classroom, sex));
+            // khoi tao doi tuong student
+            Student student = new Student(studentCode, studentName, address, age, classRoom, sex);
+            students.add(student);
             showStudent(req, resp);
         } else {
             Student studentEdit = findByStudentCode(studentCode);
-            studentEdit.setName(name);
+            studentEdit.setName(studentName);
             studentEdit.setAddress(address);
             studentEdit.setAge(age);
-            studentEdit.setClassroom(classroom);
+            studentEdit.setClassroom(classRoom);
             studentEdit.setSex(sex);
         }
         showStudent(req, resp);
@@ -87,8 +90,9 @@ public class StudentServlet extends HttpServlet {
 
     public Student findByStudentCode(String studentCode) {
         for (Student student : students) {
-            if (student.getStudentCode().equals(studentCode))
+            if (student.getStudentCode().equals(studentCode)) {
                 return student;
+            }
         }
         return null;
     }
