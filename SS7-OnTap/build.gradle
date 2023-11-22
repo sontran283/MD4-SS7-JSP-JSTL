@@ -3,7 +3,7 @@ plugins {
     id 'war'
 }
 
-group 'ra'
+group 'com.mosoftvn'
 version '1.0-SNAPSHOT'
 
 repositories {

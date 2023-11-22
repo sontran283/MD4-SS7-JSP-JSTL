@@ -17,7 +17,7 @@ public class calculatorServlet extends HttpServlet {
         String action = request.getParameter("action");
         double a = Double.parseDouble(request.getParameter("numberA"));
         double b = Double.parseDouble(request.getParameter("numberB"));
-        double result = a + b;
+        double result = 0;
 
         request.setAttribute("NUMBER_A", a);
         request.setAttribute("NUMBER_B", b);

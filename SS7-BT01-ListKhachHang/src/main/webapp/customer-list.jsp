@@ -10,15 +10,35 @@
         width: 100%;
     }
 
-    th, td {
-        padding: 8px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
+    caption {
+        font-size: 1.5em;
+        margin-bottom: 10px;
     }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    td, th {
+        padding: 10px;
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+
+    td img {
+        display: block;
+        margin: 0 auto;
+        object-fit: cover;
+    }
+
 </style>
 <body>
 <table border="1">
-    <caption><h1>CustomerList</h1></caption>
+    <caption><h1>Danh sách khách hàng</h1></caption>
     <thead>
     <tr>
         <th>STT</th>
@@ -35,7 +55,7 @@
             <td>${item.name}</td>
             <td>${item.birthday}</td>
             <td>${item.address}</td>
-            <td><img src="${item.image}" alt="Image"></td>
+            <td><img width="50" height="50" src="${item.image}" alt="Image"></td>
         </tr>
     </c:forEach>
     </tbody>

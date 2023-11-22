@@ -19,6 +19,9 @@
         <input type="text" name="numberB" placeholder="nhập vào số thứ hai">
     </p>
     <hr>
+    <select>
+        <option></option>
+    </select>
     <p>
         <input type="submit" value="+" name="action">
         <input type="submit" value="-" name="action">
